@@ -6,16 +6,16 @@ import java.lang.Math;
 import mech.mania.starterpack.game.character.action.AbilityAction;
 public class Helpers{
     public static int ManhattonDistanceFunction(
-        Character _currentPerson,
-        Position _destination
+        Position a,
+        Position b
     ) {
-        return Math.abs(_currentPerson.position().x() - _destination.x()) + Math.abs(_currentPerson.position().y()-_destination.y());
+        return Math.abs(a.x() - b.x()) + Math.abs(a.y()-b.y());
     }
     public static int ChebyshevDistanceFunction(
-        Character _currentPerson,
-        Position _destination
+        Position a,
+        Position b
     ) {
-        return Math.max(Math.abs(_currentPerson.position().x() - _destination.x()), Math.abs(_currentPerson.position().y()-_destination.y()));
+        return Math.max(Math.abs(a.x() - b.x()), Math.abs(a.y()-b.y()));
     }
     public static AbilityAction Build(
         String id,

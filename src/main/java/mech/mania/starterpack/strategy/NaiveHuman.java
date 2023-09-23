@@ -1,6 +1,6 @@
 package mech.mania.starterpack.strategy;
 
-import java.util.List;
+import java.util.*;
 
 import mech.mania.starterpack.game.GameState;
 import mech.mania.starterpack.game.character.Character;
@@ -33,8 +33,7 @@ public class NaiveHuman extends IndividualStrategy {
                 continue; // Ignore fellow humans
             }
 
-            int distance = Math.abs(c.position().x() - pos.x()) +
-                    Math.abs(c.position().y() - pos.y());
+            int distance = Helpers.ManhattonDistanceFunction(c.position(), closestZombiePos);
 
             if (distance < closestZombieDistance) {
                 closestZombiePos = c.position();
