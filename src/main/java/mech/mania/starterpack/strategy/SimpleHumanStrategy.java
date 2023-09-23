@@ -21,6 +21,7 @@ public class SimpleHumanStrategy extends Strategy {
             individualStrategies.add(new NaiveHumanStrategy());
         }
     }
+
     @Override
     public Map<CharacterClassType, Integer> decideCharacterClasses(
             List<CharacterClassType> possibleClasses,
