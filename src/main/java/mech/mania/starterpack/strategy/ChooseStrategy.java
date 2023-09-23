@@ -7,9 +7,9 @@ public class ChooseStrategy {
         //
         // For example:
         if (isZombie) {
-             return new SimpleZombieStrategy();
+             return new NaiveZombieStrategy();
          } else {
-             return new SimpleHumanStrategy();
+             return new NaiveHumanStrategy();
         }
 
     }
