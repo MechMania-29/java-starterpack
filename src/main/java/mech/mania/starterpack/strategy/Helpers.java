@@ -7,7 +7,7 @@ import java.lang.Math;
 import mech.mania.starterpack.game.character.action.AbilityAction;
 import java.util.List;
 import java.util.Map;
-
+import mech.mania.starterpack.strategy.Pair;
 //All needs add obstacle detection
 public class Helpers {
     public static int ManhattonDistanceFunction(
@@ -63,21 +63,21 @@ public class Helpers {
         return _nearestHuman;
     }
 
-    public static List<Map<Character, Integer>> FindAllZombies(Character _human, List<Character> _zombieList) {
-        List<Map<Character, Integer>> _allZombieDist = null;
+    public static List<Pair<Character, Integer>> FindAllZombies(Character _human, List<Character> _zombieList) {
+        List<Pair<Character, Integer>> _allZombieDist = null;
         for(int i = 0; i < _zombieList.size();i++) {
-            Map<Character, Integer> _indv_zombie = null;
-            _indv_zombie.put(_zombieList.get(i),ManhattonDistanceFunction(_human.position(), _zombieList.get(i).position()));
+            Pair<Character, Integer> _indv_zombie = null;
+            _indv_zombie = new Pair<>(_zombieList.get(i),ManhattonDistanceFunction(_human.position(), _zombieList.get(i).position()));
             _allZombieDist.add(_indv_zombie);
         }
         return _allZombieDist;
     }
-    public static List<Map<Character, Integer>> FindAllHumans(Character _zombie, List<Character> _humanList) {
-        List<Map<Character, Integer>> _allHumanDist = null;
+    public static List<Pair<Character, Integer>> FindAllHumans(Character _zombie, List<Character> _humanList) {
+        List<Pair<Character, Integer>> _allHumanDist = null;
         for(int i = 0; i < _humanList.size();i++) {
-            Map<Character, Integer> _indv_zombie = null;
-            _indv_zombie.put(_humanList.get(i),ManhattonDistanceFunction(_zombie.position(), _humanList.get(i).position()));
-            _allHumanDist.add(_indv_zombie);
+            Pair<Character, Integer> _indv_human = null;
+            _indv_human = new Pair<>(_humanList.get(i),ManhattonDistanceFunction(_zombie.position(), _humanList.get(i).position()));
+            _allHumanDist.add(_indv_human);
         }
         return _allHumanDist;
     }
