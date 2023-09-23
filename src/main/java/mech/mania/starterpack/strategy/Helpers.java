@@ -4,6 +4,9 @@ import mech.mania.starterpack.game.character.action.AbilityActionType;
 import mech.mania.starterpack.game.util.Position;
 import java.lang.Math;
 import mech.mania.starterpack.game.character.action.AbilityAction;
+import java.util.List;
+import java.util.Map;
+//All needs add obstacle detection
 public class Helpers{
     public static int ManhattonDistanceFunction(
         Position a,
@@ -11,6 +14,7 @@ public class Helpers{
     ) {
         return Math.abs(a.x() - b.x()) + Math.abs(a.y()-b.y());
     }
+    //Find distance
     public static int ChebyshevDistanceFunction(
         Position a,
         Position b
@@ -25,5 +29,33 @@ public class Helpers{
         String id,
         Character _healTarget
     )   {return new AbilityAction(id, _healTarget.id(), null,AbilityActionType.HEAL);}
-    
+
+    //Find nearest, returned as map of <people, distance>.
+    public static Map<Character, Integer> FindNearestZombie(Character _human, List<Character> _zombieList) {
+        int _leastDistance = 200; int nearest = 0;
+        for(int i = 0; i < _zombieList.size();i++) {
+            if(ManhattonDistanceFunction(_human.position(), _zombieList.get(i).position()) < _leastDistance) 
+            {
+                nearest = i; 
+                _leastDistance = ManhattonDistanceFunction(_human.position(), _zombieList.get(i).position());
+            }
+        }
+        Map<Character, Integer> _nearestZombie = null;
+        _nearestZombie.put(_zombieList.get(nearest), _leastDistance);
+        return _nearestZombie;
+    }
+    public static Map<Character, Integer> FindNearestHuman(Character _zombie, List<Character> _humanList) {
+        int _leastDistance = 200; int nearest = 0;
+        for(int i = 0; i < _humanList.size();i++) {
+            if(ManhattonDistanceFunction(_zombie.position(), _humanList.get(i).position()) < _leastDistance) 
+            {
+                nearest = i; 
+                _leastDistance = ManhattonDistanceFunction(_zombie.position(), _humanList.get(i).position());
+            }
+        }
+        Map<Character, Integer> _nearestHuman = null;
+        _nearestHuman.put(_humanList.get(nearest), _leastDistance);
+        return _nearestHuman;
+    }
+    //Find distance to all, returned as list of maps of <people, distance>.
 }
