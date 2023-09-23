@@ -15,6 +15,13 @@ import java.util.*;
  * A simple human which runs away from zombies
  */
 public class SimpleHumanStrategy extends Strategy {
+    List<IndividualStrategy> individualStrategies = new ArrayList<>();
+    public SimpleHumanStrategy() {
+        for (int i = 0; i < 20; i++) {
+            individualStrategies.add(new NaiveHumanStrategy());
+        }
+    }
+
     @Override
     public Map<CharacterClassType, Integer> decideCharacterClasses(
             List<CharacterClassType> possibleClasses,
