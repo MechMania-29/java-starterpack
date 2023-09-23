@@ -20,5 +20,5 @@ logs/
 !*/
 
 # Don't ignore the test directory and everything inside it
-!test/
-!test/**
+!src/strategy
+!src/strategy/**
