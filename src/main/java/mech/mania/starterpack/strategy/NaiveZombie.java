@@ -26,20 +26,24 @@ public class NaiveZombie extends IndividualStrategy {
         if (moveActions.isEmpty()) {
             return null;
         }
-        Position closestHumanPos = pos;
+        Position closestHumanPos = new Position(114514, 114514);
         int closestHumanDistance = Integer.MAX_VALUE;
 
         for (Character c : gameState.characters().values()) {
             if (c.zombie()) {
                 continue;
             }
-
+            // System.out.println("c.position:"+c.position());
             int distance = Helpers.ManhattonDistanceFunction(c.position(), closestHumanPos);
+            // System.out.println("distance:"+distance);
             if (distance < closestHumanDistance) {
                 closestHumanPos = c.position();
                 closestHumanDistance = distance;
             }
         }
+
+        // System.out.println(closestHumanPos);
+        // System.out.println(closestHumanDistance);
 
         int moveDistance = Integer.MAX_VALUE;
         MoveAction moveChoice = moveActions.get(0);
