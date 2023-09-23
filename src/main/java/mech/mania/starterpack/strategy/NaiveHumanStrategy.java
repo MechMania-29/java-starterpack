@@ -14,30 +14,67 @@ import java.util.*;
 /**
  * A simple human which runs away from zombies
  */
-public class NaiveHumanStrategy extends IndividualStrategy {
+public class NaiveHumanStrategy extends Strategy {
+    NaiveHuman human = new NaiveHuman();
 
     @Override
-    public void Init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Init'");
+    public Map<CharacterClassType, Integer> decideCharacterClasses(
+            List<CharacterClassType> possibleClasses,
+            int numToPick,
+            int maxPerSameClass) {
+        // Selecting character classes following a specific distribution
+        return Map.of(
+                CharacterClassType.MARKSMAN, 5,
+                CharacterClassType.MEDIC, 4,
+                CharacterClassType.TRACEUR, 5,
+                CharacterClassType.DEMOLITIONIST, 2);
     }
 
     @Override
-    public void Move() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Move'");
+    public List<MoveAction> decideMoves(
+            Map<String, List<MoveAction>> possibleMoves,
+            GameState gameState) {
+        List<MoveAction> choices = new ArrayList<>();
+        for (Map.Entry<String, List<MoveAction>> entry : possibleMoves.entrySet()) {
+            String characterId = entry.getKey();
+            List<MoveAction> moves = entry.getValue();
+            human.Init(characterId, gameState);
+            MoveAction moveChoice = human.Move(gameState, moves);
+            if (moveChoice != null)
+                choices.add(moveChoice);
+        }
+
+        return choices;
     }
 
     @Override
-    public void Attack() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Attack'");
+    public List<AttackAction> decideAttacks(
+            Map<String, List<AttackAction>> possibleAttacks,
+            GameState gameState) {
+        List<AttackAction> choices = new ArrayList<>();
+
+        for (Map.Entry<String, List<AttackAction>> entry : possibleAttacks.entrySet()) {
+            String characterId = entry.getKey();
+            List<AttackAction> attacks = entry.getValue();
+            AttackAction attackChoice = human.Attack(gameState, attacks);
+            if (attackChoice != null) choices.add(attackChoice);
+        }
+        return choices;
     }
 
     @Override
-    public void Ability() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Ability'");
+    public List<AbilityAction> decideAbilities(
+            Map<String, List<AbilityAction>> possibleAbilities,
+            GameState gameState) {
+        List<AbilityAction> choices = new ArrayList<>();
+
+        for (Map.Entry<String, List<AbilityAction>> entry : possibleAbilities.entrySet()) {
+            String characterId = entry.getKey();
+            List<AbilityAction> abilities = entry.getValue();
+            AbilityAction abilityAction = human.Ability(gameState, abilities);
+            if (abilityAction != null) choices.add(abilityAction);
+        }
+
+        return choices;
     }
-    
 }
