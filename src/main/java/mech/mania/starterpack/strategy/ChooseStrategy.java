@@ -6,12 +6,11 @@ public class ChooseStrategy {
         // NOTE: You can use "isZombie" to use two different strategies for humans and zombies (RECOMMENDED!)
         //
         // For example:
-        // if (isZombie) {
-        //     return new SimpleZombieStrategy();
-        // } else {
-        //     return new SimpleHumanStrategy();
-        // }
+        if (isZombie) {
+             return new SimpleZombieStrategy();
+         } else {
+             return new SimpleHumanStrategy();
+        }
 
-        return new RandomStrategy();
     }
 }
