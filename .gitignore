@@ -22,3 +22,4 @@ logs/
 # Don't ignore the test directory and everything inside it
 !src/strategy
 !src/strategy/**
+*.class
