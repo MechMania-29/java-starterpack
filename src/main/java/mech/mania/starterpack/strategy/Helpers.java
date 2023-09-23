@@ -62,5 +62,24 @@ public class Helpers {
         Pair<Character, Integer> _nearestHuman = new Pair<Character, Integer>(_humanList.get(nearest), _leastDistance);
         return _nearestHuman;
     }
-    // Find distance to all, returned as list of maps of <people, distance>.
+
+    public static List<Map<Character, Integer>> FindAllZombies(Character _human, List<Character> _zombieList) {
+        List<Map<Character, Integer>> _allZombieDist = null;
+        for(int i = 0; i < _zombieList.size();i++) {
+            Map<Character, Integer> _indv_zombie = null;
+            _indv_zombie.put(_zombieList.get(i),ManhattonDistanceFunction(_human.position(), _zombieList.get(i).position()));
+            _allZombieDist.add(_indv_zombie);
+        }
+        return _allZombieDist;
+    }
+    public static List<Map<Character, Integer>> FindAllHumans(Character _zombie, List<Character> _humanList) {
+        List<Map<Character, Integer>> _allHumanDist = null;
+        for(int i = 0; i < _humanList.size();i++) {
+            Map<Character, Integer> _indv_zombie = null;
+            _indv_zombie.put(_humanList.get(i),ManhattonDistanceFunction(_zombie.position(), _humanList.get(i).position()));
+            _allHumanDist.add(_indv_zombie);
+        }
+        return _allHumanDist;
+    }
 }
+
