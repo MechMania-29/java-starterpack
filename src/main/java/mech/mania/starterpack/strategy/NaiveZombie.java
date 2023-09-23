@@ -45,7 +45,6 @@ public class NaiveZombie extends IndividualStrategy {
 
         int moveDistance = Integer.MAX_VALUE;
         MoveAction moveChoice = moveActions.get(0);
-
         for (MoveAction m : moveActions) {
             int distance = Math.abs(m.destination().x() - closestHumanPos.x())
                     + Math.abs(m.destination().y() - closestHumanPos.y());
