@@ -30,7 +30,7 @@ public class NaiveZombie extends IndividualStrategy {
         int closestHumanDistance = Integer.MAX_VALUE;
 
         for (Character c : gameState.characters().values()) {
-            if (c.isZombie()) {
+            if (c.zombie()) {
                 continue;
             }
 
