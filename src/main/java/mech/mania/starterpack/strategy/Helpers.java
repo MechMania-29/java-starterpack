@@ -16,3 +16,13 @@ public class Helpers{
         return Math.max(Math.abs(_currentPerson.position().x() - _destination.x()), Math.abs(_currentPerson.position().y()-_destination.y()));
     }
 }
+    public static AbilityAction Build(
+        String id,
+        Position _buildPosition
+    )   {return new AbilityAction(id, null, _buildPosition,AbilityActionType.BUILD_BARRICADE);}
+    public static AbilityAction Heal(
+        String id,
+        Character _healTarget
+    )   {return new AbilityAction(id, _healTarget.id(), null,AbilityActionType.HEAL);}
+    
+}
